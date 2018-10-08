@@ -25,11 +25,11 @@ class ChatAPI(Resource):
         ]
 
     def post(self):
-        print(self.reqparse.parse_args())
+        # print(self.reqparse.parse_args())
         return "POST successful"
 
 
-api.add_resource(ChatAPI, '/api/v1.0')
+api.add_resource(ChatAPI, '/api')
 
 if __name__ == "__main__":
-    app.run(debug=True, port=80)
+    app.run(port=80)
