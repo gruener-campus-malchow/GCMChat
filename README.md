@@ -6,7 +6,7 @@ Die API ist momentan unter sn0wman.pythonanywhere.com/api erreichbar.
 
 Methoden:
 
-* GET: gibt den Chat im JSON-Format zurück, momenentan so:
+* GET: gibt den Chat im JSON-Format zurück, momentan so:
     ```json
     [
         {
