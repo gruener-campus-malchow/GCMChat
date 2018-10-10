@@ -2,7 +2,7 @@
 
 ## API
 
-Die API ist momentan unter sn0wman.pythonanywhere.com/api erreichbar.
+Die API ist momentan unter [https://sn0wman.pythonanywhere.com/api] erreichbar.
 
 Methoden:
 
