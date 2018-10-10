@@ -15,19 +15,17 @@ class ChatAPI(Resource):
         super(ChatAPI, self).__init__()
 
     def get(self):
-        return(self.reqparse.parse_args())
-        
-        #return [
-        #    {
-        #        "username": "testuser1",
-        #        "text": "text1"
-        #    },
-        #    {
-        #        "username": "testuser2",
-        #        "text": "text2"
-        #    }
-        #]
-        
+        return [
+            {
+                "username": "testuser1",
+                "text": "text1"
+            },
+            {
+                "username": "testuser2",
+                "text": "text2"
+            }
+        ]
+
     def post(self):
         # print(self.reqparse.parse_args())
         return "POST successful"
