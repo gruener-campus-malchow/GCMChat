@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('login_button').addEventListener('click', login)
+  document.getElementById('login_button').addEventListener('click', login)
 })
 
 function checkLoginName(name){
@@ -8,7 +8,15 @@ function checkLoginName(name){
 	return name.match(search);
 }
 var username;
+var token;
+var loggedin = false;
 
+
+function posten(){
+	var chatmsg = document.getElementById("eingabetext").value;
+	console.log(chatmsg);
+	//chat-msg erstellen
+}
 function login(){
 	let xhr = new XMLHttpRequest;
 	username = document.getElementById("username").value;
@@ -17,15 +25,22 @@ function login(){
 		xhr.open('GET', 'https://sn0wman.pythonanywhere.com/api?username=' + username, true);
 		xhr.onload = function(){
 			if(this.status === 200){
-				var liste = [{"status": "accept"}]; //JSON.parse(this.responseText);
+				var liste = [{"status": "accept","token": "y54xdc54bhlk","seite": getSeite()}]; //JSON.parse(this.responseText);
 				for(var i in liste){
-					console.log(liste[i])
 					for(var x in liste[i]){
-						if(x == "status"){ //sollte unterschiedliche sachen ergeben; zB falsches PW, Username exestiert nicht, sonstiges
+						if(x == "status"){
 							var status = liste[i][x];
-							document.body.innerHTML = status; 
-							// evlt. die Chat-Seite in Js einbringen und hier laden, so bleibt der token erhalten 
-							
+							if(status == "accept"){
+								loggedin = true;
+							}
+						}
+						if(loggedin){
+							if(x == "token"){
+								token = liste[i][x];
+							}
+							if(x == "seite"){
+								document.body.innerHTML = liste[i][x];
+							}
 						}
 					}
 				}
@@ -35,4 +50,9 @@ function login(){
 	}else{
 		document.getElementById("p1").innerHTML = "Der name ist nicht legal.<br>'" + checkedusername + "'";
 	}
+}
+
+
+function getSeite(){
+	return '<div class="topheader"><!--hier steht "Menü"  *Der Nutzername*--><strong class="centered"><a class="nolink bigtext centered" href="http://freesoccerhdx.tk/"> Menü </a></strong><strong><div class="lowertxt right"> Eingeloggt als: Lunsher2000 </div></strong></div><br> <br><div class="eingabefenster centered"><textarea class="inputtxt" type="text" id="eingabetext" placeholder="Text..."></textarea><button id="postebutton" class="postebutton" onclick="posten()"> Posten </button></div><br><div class="chatverlauf"></div>';
 }
