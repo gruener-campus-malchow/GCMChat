@@ -25,7 +25,14 @@ class ChatAPI(Resource):
         return "Success"
 
 
+class DataPurge(Resource):
+    def get(self):
+        db.purge()
+        return "Data purged"
+
+
 api.add_resource(ChatAPI, '/api')
+api.add_resource(DataPurge, '/api/deleteData')
 
 if __name__ == "__main__":
     app.run(port=80)
