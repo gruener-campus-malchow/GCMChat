@@ -4,9 +4,9 @@
 
 Die API ist momentan unter https://sn0wman.pythonanywhere.com erreichbar.
 
-###Methoden
+### Methoden
 
-####/api
+#### /api
 
 * GET: gibt den gesamten Chat im JSON-Format zurück, momentan z.B. so:
 
@@ -31,6 +31,6 @@ Die API ist momentan unter https://sn0wman.pythonanywhere.com erreichbar.
     }
     ```
 
-####/api/deleteData
+#### /api/deleteData
 
 * Löscht zu Debug-Zwecken alle Daten aus dem Speicher
