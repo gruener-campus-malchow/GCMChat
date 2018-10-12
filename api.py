@@ -1,13 +1,14 @@
 from flask import Flask
 from flask_restful import Api, Resource, reqparse
 from flask_cors import CORS
-from tinydb import TinyDB, Query
+from tinydb import TinyDB
 
 app = Flask(__name__)
 CORS(app)
 api = Api(app)
 
-db = TinyDB('chatdb')
+db = TinyDB('chatdb.json')
+
 
 class ChatAPI(Resource):
     def __init__(self):
@@ -17,20 +18,11 @@ class ChatAPI(Resource):
         super(ChatAPI, self).__init__()
 
     def get(self):
-        return [
-            {
-                "username": "testuser1",
-                "text": "text1"
-            },
-            {
-                "username": "testuser2",
-                "text": "text2"
-            }
-        ]
+        return db.all()
 
     def post(self):
-        # print(self.reqparse.parse_args())
-        return "POST successful"
+        db.insert(self.reqparse.parse_args())
+        return "Success"
 
 
 api.add_resource(ChatAPI, '/api')
