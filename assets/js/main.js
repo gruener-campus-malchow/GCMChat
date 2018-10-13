@@ -14,25 +14,35 @@ var chatlog;
 
 function posten(){
 	var chatmsg = document.getElementById("eingabetext").value;
-	console.log(chatmsg);
-	//chat-msg erstellen & senden
-	var xhr = new XMLHttpRequest();
-	xhr.open('POST', 'https://sn0wman.pythonanywhere.com/api', true);
-	//xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	xhr.onload = function () {
-		if(this.status === 200){
-			var resp = this.responseText;
-			console.log(resp);
-		}
-	};
-	//{"username": null, "text": null}
-	//xhr.send("username="+username+"&text="+chatmsg);
-	//{"username": username, "text": chatmsg};
+	if((chatmsg+"").replace(/[\r\n]/g, '').replace(" ","").length > 5){
+		//chat-msg erstellen & senden
+		var xhr = new XMLHttpRequest();
+		xhr.open('POST', 'https://sn0wman.pythonanywhere.com/api', true);
+		//xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		xhr.onload = function () {
+			if(this.status === 200){
+				var resp = this.responseText;
+				console.log(resp);
+				reloadChat();
+			}
+		};
+		//{"username": null, "text": null}
+		//xhr.send("username="+username+"&text="+chatmsg);
+		//{"username": username, "text": chatmsg};
 
-	var data = new FormData();
-	data.append("username", username);
-	data.append("text", chatmsg);
-	xhr.send(data);
+		var data = new FormData();
+		data.append("username", username);
+		data.append("text", chatmsg);
+		xhr.send(data);
+		document.getElementById("eingabetext").value = "";
+		
+	}else{
+		document.getElementById("eingabetext").value = "";
+		document.getElementById("eingabetext").placeholder = "Um Spam zu vermeiden, musst du mehr als 5 sinnvolle Zeichen verwenden!";
+		setInterval(function(){ 
+			document.getElementById("eingabetext").placeholder = "Text...";
+		}, 1000*3);
+	}
 }
 function loadPage(nr){
 	var msges = "";
@@ -41,7 +51,7 @@ function loadPage(nr){
 		var text = chatlog[i]["text"];
 		var username = chatlog[i]["username"];
 		msges += "<div class='chatborder'>";
-		msges += "<text> Von: "+username+" <br><br>"+text+"</text><br>";
+		msges += "<text> Von: "+username+" <br><br>"+(text+"").replace(/[\r\n]/g, '<br>')+"</text><br>";
 		msges += "</div>";
 	}
 
