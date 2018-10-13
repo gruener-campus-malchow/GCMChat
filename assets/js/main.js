@@ -18,7 +18,6 @@ function posten(){
 		//chat-msg erstellen & senden
 		var xhr = new XMLHttpRequest();
 		xhr.open('POST', 'https://sn0wman.pythonanywhere.com/api', true);
-		//xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 		xhr.onload = function () {
 			if(this.status === 200){
 				var resp = this.responseText;
@@ -41,22 +40,50 @@ function posten(){
 		document.getElementById("eingabetext").placeholder = "Um Spam zu vermeiden, musst du mehr als 5 sinnvolle Zeichen verwenden!";
 		setInterval(function(){ 
 			document.getElementById("eingabetext").placeholder = "Text...";
-		}, 1000*3);
+		}, 1000*5);
 	}
 }
-function loadPage(nr){
+function loadPage(nr){ // `nr` wird noch nicht verwendet
 	var msges = "";
 
 	for(var i in chatlog){
-		var text = chatlog[i]["text"];
+		var text = chatlog[i]["text"].replace(/<br>/g, "br").replace(/[\r\n]/g, "<br>").split("<br>");
 		var username = chatlog[i]["username"];
+
+		var showtext = "";
+		var offtext = "";
+
+		
+		for(var x in text){
+			if(x < 10){
+				showtext += text[x] + "<br>";
+			}else{
+				offtext += text[x] + "<br>";
+			}
+		}
+		
+
 		msges += "<div class='chatborder'>";
-		msges += "<text> Von: "+username+" <br><br>"+(text+"").replace(/[\r\n]/g, '<br>')+"</text><br>";
+		msges += "<text id='chatmsgnr"+i+"'> Von: "+username+" <br><br>"+(showtext+"").replace(/[\r\n]/g, '<br>')+"</text><br>";
+		if(offtext.split("<br>").length > 1){
+			msges += "<button tgt='chatmsgnr"+i+"' offtxt='"+offtext+"' onclick='showMoreTxt(this)' class='thereismorebutton'>There is more....</button>";
+		}
 		msges += "</div>";
 	}
 
 	document.getElementById("chatverlauf").innerHTML = msges;
 }
+function showMoreTxt(button){
+	var offtext = button.getAttribute("offtxt");
+	var target = button.getAttribute("tgt");
+	
+	var showtxt = document.getElementById(target);
+	console.log(showtxt)
+	showtxt.innerHTML += offtext;
+	button.style.visibility = "hidden";
+}
+
+
 function reloadChat(){
 	let xhr = new XMLHttpRequest;
 	
