@@ -18,7 +18,7 @@ function posten(){
 	//chat-msg erstellen & senden
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', 'https://sn0wman.pythonanywhere.com/api', true);
-	xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	//xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 	xhr.onload = function () {
 		if(this.status === 200){
 			var resp = this.responseText;
@@ -27,9 +27,12 @@ function posten(){
 	};
 	//{"username": null, "text": null}
 	//xhr.send("username="+username+"&text="+chatmsg);
-	var data = {"username": username, "text": chatmsg};
-	xhr.send(data);
+	//{"username": username, "text": chatmsg};
 
+	var data = new FormData();
+	data.append("username", username);
+	data.append("text", chatmsg);
+	xhr.send(data);
 }
 function loadPage(nr){
 	var msges = "";
@@ -43,6 +46,19 @@ function loadPage(nr){
 	}
 
 	document.getElementById("chatverlauf").innerHTML = msges;
+}
+function reloadChat(){
+	let xhr = new XMLHttpRequest;
+	
+	xhr.open('GET', 'https://sn0wman.pythonanywhere.com/api', true);
+	xhr.onload = function(){
+		if(this.status === 200){
+			chatlog = JSON.parse(this.responseText).reverse();
+			loadPage(1);
+		}
+	}
+	xhr.send();
+
 }
 function login(){
 	let xhr = new XMLHttpRequest;
@@ -92,5 +108,5 @@ function login(){
 
 
 function getSeite(){
-	return '<div class="topheader"><strong class="centered"><a class="nolink bigtext centered" href="http://freesoccerhdx.tk/"> Menü </a></strong><strong><div class="lowertxt right"> Eingeloggt als: '+username+' </div></strong></div><br> <br><div class="eingabefenster centered"><textarea class="inputtxt" type="text" id="eingabetext" placeholder="Text..."></textarea><button id="postebutton" class="postebutton" onclick="posten()"> Posten </button></div><br><div id="chatverlauf" class="chatverlauf"></div>';
+	return '<div class="topheader"><strong class="centered"><a class="nolink bigtext centered" href="http://freesoccerhdx.tk/"> Menü </a></strong><strong><div class="lowertxt right"> Eingeloggt als: '+username+' </div></strong></div><br> <br><div class="eingabefenster centered"><textarea class="inputtxt" type="text" id="eingabetext" placeholder="Text..."></textarea><button id="postebutton" class="postebutton" onclick="posten()"> Posten </button></div><br><button class="postebutton" onclick="reloadChat()"> Chat Neuladen</button><div id="chatverlauf" class="chatverlauf"></div>';
 }
