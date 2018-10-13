@@ -13,8 +13,8 @@ db = TinyDB('chatdb.json')
 class ChatAPI(Resource):
     def __init__(self):
         self.reqparse = reqparse.RequestParser()
-        self.reqparse.add_argument('username', type=str, location='json')
-        self.reqparse.add_argument('text', type=str, location='json')
+        self.reqparse.add_argument('username', type=str)
+        self.reqparse.add_argument('text', type=str)
         super(ChatAPI, self).__init__()
 
     def get(self):
