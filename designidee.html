@@ -10,19 +10,18 @@
 	</head>
 	<body>
     	<div class="topheader">
-			<!--hier steht "Menü"  *Der Nutzername*-->
 			<strong class="centered"><a class="nolink bigtext centered" href="http://freesoccerhdx.tk/"> Menü </a></strong>
-			<strong><div class="lowertxt right"> Eingeloggt als: Lunsher2000 </div></strong>	
+			<strong><div class="lowertxt right"> Eingeloggt als: '+username+' </div></strong>	
 		</div>
 		<br> <br>
 		
 		<div class="eingabefenster centered">
 			<textarea class="inputtxt" type="text" id="eingabetext" placeholder="Text..."></textarea>
-			<button id="postebutton" class="postebutton"> Posten </button>
+			<button id="postebutton" class="postebutton" onclick="posten()"> Posten </button>
 		</div>
 		<br>
 
-		<div class="chatverlauf">
+		<div id="chatverlauf" class="chatverlauf">
 
 		</div>
 	</body>
