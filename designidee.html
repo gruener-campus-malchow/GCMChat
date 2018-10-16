@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>GCM-CHAT</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="assets/css/app.css" />
+		<script src="assets/js/main.js"></script>
+	</head>
+	<body>
+    	<div class="topheader">
+			<strong class="centered"><a class="nolink bigtext centered" href="http://freesoccerhdx.tk/"> Menü </a></strong>
+			<strong><div class="lowertxt right"> Eingeloggt als: '+username+' </div></strong>	
+		</div>
+		<br> <br>
+		
+		
+		<div class="eingabefenster centered">
+			<textarea class="inputtxt" type="text" id="eingabetext" placeholder="Text..."></textarea>
+			<button id="postebutton" class="postebutton" onclick="posten()"> Posten </button>
+		</div>
+		<br>
+		
+		<button class="postebutton" onclick="reloadChat()"> Chat Neuladen</button>
+		<div id="chatverlauf" class="chatverlauf">
+
+		</div>
+	</body>
+</html>
