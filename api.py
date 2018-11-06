@@ -71,10 +71,17 @@ class Login(Resource):
             return "Wrong"
 
 
+class LoginDataPurge(Resource):
+    def get(self):
+        userdb.purge()
+        return "Data purged"
+
+
 api.add_resource(ChatAPI, '/api')
 api.add_resource(DataPurge, '/api/deleteData')
 api.add_resource(Register, '/api/register')
 api.add_resource(Login, '/api/login')
+api.add_resource(LoginDataPurge, '/api/deleteLoginData')
 
 if __name__ == "__main__":
     app.run(port=80)

@@ -40,7 +40,7 @@ python3 api.py
 
 #### /api/deleteData
 
-* GET: Löscht zu Debug-Zwecken alle Daten aus dem Speicher
+* GET: Löscht zu Debug-Zwecken alle Chatdaten aus dem Speicher
 
 #### /api/register
 
@@ -67,3 +67,7 @@ python3 api.py
     ```
     
     Bei korrekten Login-Daten wird ``"Success"`` zurückgegeben, falls ein falsches Passwort eingegeben wurde oder der Nutzername noch nicht vergeben ist, ``"Wrong"``.
+
+#### /api/deleteLoginData
+
+* GET: Löscht zu Debug-Zwecken alle Logindaten aus dem Speicher
