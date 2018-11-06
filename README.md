@@ -7,7 +7,7 @@ Die API ist momentan unter https://sn0wman.pythonanywhere.com erreichbar.
 ### Installation
 
 ```bash
-pip3 install -r requirements.txt
+pip3 install -U -r requirements.txt
 python3 api.py
 ```
 
