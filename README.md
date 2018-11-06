@@ -7,7 +7,7 @@ Die API ist momentan unter https://sn0wman.pythonanywhere.com erreichbar.
 ### Installation
 
 ```bash
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 python3 api.py
 ```
 
@@ -40,4 +40,30 @@ python3 api.py
 
 #### /api/deleteData
 
-* Löscht zu Debug-Zwecken alle Daten aus dem Speicher
+* GET: Löscht zu Debug-Zwecken alle Daten aus dem Speicher
+
+#### /api/register
+
+* POST: Registriert einen neuen Nutzer. Syntax:
+
+    ```json
+    {
+        "username": "testuser1",
+        "password": "testpass"
+    }
+    ```
+    
+    Bei erfolgreicher Registrierung wird ``"Success"`` zurückgegeben, falls der Nutzername schon vergeben ist, ``"ExistingUser"``.
+    
+#### /api/login
+
+* POST: Überprüft Nutzerdaten. Syntax:
+
+    ```json
+    {
+        "username": "testuser1",
+        "password": "testpass"
+    }
+    ```
+    
+    Bei korrekten Login-Daten wird ``"Success"`` zurückgegeben, falls ein falsches Passwort eingegeben wurde oder der Nutzername noch nicht vergeben ist, ``"Wrong"``.
